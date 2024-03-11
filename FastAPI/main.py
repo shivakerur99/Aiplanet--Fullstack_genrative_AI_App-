@@ -1,6 +1,6 @@
 import io
 from pydantic import BaseModel
-from fastapi import FastAPI, Form, HTTPException, File, UploadFile
+from fastapi import FastAPI, HTTPException, File, UploadFile
 from pdfminer.high_level import extract_text
 from datetime import datetime
 from fastapi.middleware.cors import CORSMiddleware
@@ -15,14 +15,11 @@ from langchain.text_splitter import CharacterTextSplitter
 from langchain.docstore.document import Document as LangchainDocument
 
 
-from fastapi.responses import JSONResponse
-import os
-
 import os
 
 app = FastAPI()
 
-# Set up CORS
+# Set up CORS (Cross-Origin Resource Sharing) for allowing requests from all origins
 origins=["*"]
 app.add_middleware(
     CORSMiddleware,
@@ -37,7 +34,7 @@ DATABASE_URL = "sqlite:///./test.db"
 engine = create_engine(DATABASE_URL)
 metadata = MetaData()
 
-# Define the document table
+# Define the document table schema
 documents = Table(
     "documents",
     metadata,
@@ -47,7 +44,7 @@ documents = Table(
     Column("content", String),
 )
 
-# Create the table in the database
+# Create the document table in the database
 metadata.create_all(engine)
 
 # Define Pydantic model for the document
@@ -56,25 +53,24 @@ class Document(BaseModel):
     upload_date: str
     content: str
 
-dumps=[]
-import asyncio
-
+# Function to save uploaded files
 async def save_uploaded_file(file: UploadFile, destination: str):
     with open(destination, "wb") as buffer:
         while chunk := await file.read(1024):
             buffer.write(chunk)
 
-# Upload PDF endpoint
+# Endpoint for uploading PDF files
 @app.post("/upload/")
 async def upload_pdf(file: UploadFile = File(...)):
 
-
+    # Check if the uploaded file is a PDF
     if not file.filename.lower().endswith('.pdf'):
         raise HTTPException(status_code=400, detail="Only PDF files are allowed.")
     
+    # Read content of the uploaded PDF file
     content = await file.read()
     
-    # Extract text from PDF
+    # Extract text from the PDF
     with io.BytesIO(content) as pdf_file:
         text_content = extract_text(pdf_file)
     
@@ -90,22 +86,26 @@ async def upload_pdf(file: UploadFile = File(...)):
         )
         last_record_id = await database.execute(query)
     
-    # Return the document object
-        
+    # Save the uploaded PDF file
     destination = f"files/{file.filename}"
     await save_uploaded_file(file, destination)
+    
+    # Return the document object
     return doc
 
-
+# Pydantic model for input data
 class DataInput(BaseModel):
     responseData: str
     userInput: str
 
+# Endpoint for processing user data
 @app.post("/doc/")
 async def process_data(data: DataInput):
     # Access responseData and userInput
     response_data = data.responseData
     user_input = data.userInput
+    
+    # Load required models and components from Langchain library
     os.environ['HUGGINGFACEHUB_API_TOKEN'] ="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" 
     dom = [LangchainDocument(page_content=response_data, metadata={"source": "local"})]
 
@@ -121,7 +121,8 @@ async def process_data(data: DataInput):
 
     chain = load_qa_chain(llm, chain_type="stuff")
 
+    # Perform similarity search and question answering
     dm = db.similarity_search(user_input)
-
     result = chain.run(input_documents=dm, question=user_input)
+    
     return result

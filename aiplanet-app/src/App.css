@@ -19,7 +19,7 @@
   }
 }
 
-.logo {
+.nav-logo {
   padding-top: 8px;
   width: 0.93px;
   height: 41px;
@@ -34,26 +34,12 @@
 }
 
 
-.big {
+.container {
   display: flex;
 }
 
-.pad {
-  padding-right: 40px;
-  padding-left: 9px;
-}
-@media (max-width: 414px) {
-  .pad {
-    padding-right: 5px;
-  }
-}
 
-
-.final {
-  padding-left: 100px;
-}
-
-.filename {
+.file-logo-container {
   position: relative;
   width: 10px;
   height: 28.27px;
@@ -62,12 +48,12 @@
 }
 
 @media (max-width: 414px){
-  .filename{
+  .file-logo-container{
     left:-100px;  
   }
 }
 
-.filecred {
+.filename {
   position: relative;
   top: -30px;
   padding-left: 40px;
@@ -83,7 +69,21 @@
   color: #0FA958;
 }
 
-.file {
+
+
+.Upload-container {
+  padding-right: 40px;
+  padding-left: 9px;
+}
+@media (max-width: 414px) {
+  .Upload-container {
+    padding-right: 5px;
+  }
+}
+
+
+
+.file-upload-logo {
   width: 180px;
   height: 39px;
   border-radius: 8px;
@@ -91,14 +91,13 @@
 }
 
 @media (max-width: 414px) {
-  .file {
+  .file-upload-logo {
     width: 130px;
   }
 }
 
 
-
-.innerfile {
+.file-upload-logo-innerfile {
   width: 109px;
   height: 18px;
   gap: 12px;
@@ -106,43 +105,11 @@
   padding-right: 10px;
   padding-top: 10px;
 }
-
-.btn{
-  padding-left: 40px;
-  position: relative;
-}
-
-@media (max-width: 414px) {
-  .btn {
-    padding-left: 25px;
-    left: -10px;
-  }
-}
-
-
-.btn-c {
-  position: relative;
-  width: 79px;
-  height: 17px;
-  font-family: Inter;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 17px;
-  letter-spacing: 0em;
-  text-align: left;
-  background: #FFFFFF;
-  color: #000000;
-  border: none;
+.svg-icon {
+  position: sticky;
   cursor: pointer;
-  padding: 0;
-  outline: none;
-  top: -4px;
 }
-
-.btn{
-  padding-left: 40px;
-}
-.btn-c {
+.btn-submit-upload {
   position: relative;
   width: 79px;
   height: 17px;
@@ -163,7 +130,7 @@
 }
 
 @media (max-width: 414px){
-  .btn-c{
+  .btn-submit-upload{
     left:38px    
   }
 }
@@ -184,7 +151,7 @@
   }
 }
 
-.chat-msg {
+.chat-message {
   display: flex;
   padding-bottom: 15px;
   position: relative; 
@@ -192,36 +159,12 @@
 }
 
 @media (max-width: 414px) {
-  .chat-msg {
+  .chat-message {
     width: 286px;
     height: auto;
     top: 77px;
     left: 26px;
-    /* Add any additional styles as needed */
   }
-}
-
-.btn-send {
-  position: absolute;
-  top: 15px;
-  left: 1250px;
-  border:none;
-  border-radius: 30px;
-  opacity: 0.5;
-  
-}
-
-@media (max-width: 414px) {
-  .btn-send{
-    top:16px;
-    left:320px;
-  }
-}
-.avatar2 {
-  width: 40px;
-  height: 40px;
-  position: relative; 
-  z-index: 2; 
 }
 
 .msg {
@@ -234,6 +177,30 @@
   text-align: left;
   color: #1B1F2A;
 }
+
+.avatar2 {
+  width: 40px;
+  height: 40px;
+  position: relative; 
+  z-index: 2; 
+}
+
+.button-send {
+  position: absolute;
+  top: 15px;
+  left: 1250px;
+  border:none;
+  border-radius: 30px;
+  opacity: 0.5;
+  
+}
+@media (max-width: 414px) {
+  .btn-send{
+    top:16px;
+    left:320px;
+  }
+}
+
 
 
 .chatbox {
@@ -277,16 +244,6 @@
   padding-left: 40px;
 }
 
-.btn {
-  position: relative;
-  padding-left: 40px;
-  /* top:-20px; */
-}
-
-.svg-icon {
-  position: sticky;
-  cursor: pointer;
-}
 
 .disabled-button {
   pointer-events: none; 
