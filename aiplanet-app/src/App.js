@@ -46,8 +46,14 @@ try {
     responseData: responseData.content,
     userInput: clientInput
   };
-
-  const response = await Api.post('/doc/', postData);
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*', // You may need to adjust this based on your backend configuration
+      // Add any other headers if needed
+    }
+  };
+  const response = await Api.post('/doc/', postData,config);
   console.log('Response from backend:', response.data);
   setChatLog([...chatLog, { user: "me", message: clientInput }, { user: "gpt", message: response.data }]);
   setIsLoading(false);
