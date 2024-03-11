@@ -34,33 +34,56 @@ try {
 }
 };
 
+// async function handleSubmit(e) {
+// e.preventDefault();
+// setChatLog([...chatLog, { user: "me", message: input }]);
+// setInput("");
+// setIsLoading(true);
+// try {
+//   const clientInput = document.getElementById('userInputTextArea').value;
+//   console.log(clientInput);
+//   const postData = {
+//     responseData: responseData.content,
+//     userInput: clientInput
+//   };
+//   const response = await Api.post('/doc/', postData,{
+//     headers: {
+//       'Content-Type': 'application/json'
+//     }
+//   });
+//   console.log('Response from backend:', response.data);
+//   setChatLog([...chatLog, { user: "me", message: clientInput }, { user: "gpt", message: response.data }]);
+//   setIsLoading(false);
+// } catch (error) {
+//   console.error('Error sending data to backend:', error);
+//   setIsLoading(false);
+// } 
+// }
 async function handleSubmit(e) {
-e.preventDefault();
-setChatLog([...chatLog, { user: "me", message: input }]);
-setInput("");
-setIsLoading(true);
-try {
-  const clientInput = document.getElementById('userInputTextArea').value;
-  console.log(clientInput);
-  const postData = {
-    responseData: responseData.content,
-    userInput: clientInput
-  };
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*', // You may need to adjust this based on your backend configuration
-      // Add any other headers if needed
-    }
-  };
-  const response = await Api.post('/doc/', postData,config);
-  console.log('Response from backend:', response.data);
-  setChatLog([...chatLog, { user: "me", message: clientInput }, { user: "gpt", message: response.data }]);
-  setIsLoading(false);
-} catch (error) {
-  console.error('Error sending data to backend:', error);
-  setIsLoading(false);
-}
+  e.preventDefault();
+  setChatLog([...chatLog, { user: "me", message: input }]);
+  setInput("");
+  setIsLoading(true);
+  try {
+    const clientInput = document.getElementById('userInputTextArea').value;
+    console.log(clientInput);
+    const postData = {
+      responseData: responseData.content,
+      userInput: clientInput
+    };
+    const response = await Api.post('/doc/', postData, {
+      headers: {
+        // 'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+      }
+    });
+    console.log('Response from backend:', response.data);
+    setChatLog([...chatLog, { user: "me", message: clientInput }, { user: "gpt", message: response.data }]);
+    setIsLoading(false);
+  } catch (error) {
+    console.error('Error sending data to backend:', error);
+    setIsLoading(false);
+  }
 }
 
 

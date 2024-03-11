@@ -16,7 +16,6 @@ from langchain.docstore.document import Document as LangchainDocument
 
 
 from fastapi.responses import JSONResponse
-import shutil
 import os
 
 import os
@@ -24,13 +23,12 @@ import os
 app = FastAPI()
 
 # Set up CORS
-origins=["*"
-         ,]
+origins=["*"]
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
     allow_headers=["*"],
 )
 
@@ -111,7 +109,7 @@ async def process_data(data: DataInput):
     os.environ['HUGGINGFACEHUB_API_TOKEN'] ="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" 
     dom = [LangchainDocument(page_content=response_data, metadata={"source": "local"})]
 
-    text_spliter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    text_spliter = CharacterTextSplitter(chunk_size=3000, chunk_overlap=0)
     docs = text_spliter.split_documents(dom)
 
     embeddings = HuggingFaceEmbeddings()
