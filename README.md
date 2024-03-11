@@ -28,4 +28,13 @@ setup your HuggingFace access token in hugging face website
 then run command [uvicorn main:app --reload]
 
 
+# steps to run the app for [deployed]
+
+first load backend server "https://aiplanet-fullstack-genrative-ai-app.onrender.com" (wait until it loads)
+
+and load frontend server "https://aiplanet-68o7.onrender.com/" (it load fastly)
+
+click on + button to upload file and then (important) click on upload pdf 
+
+and next ask the queries in chatbox wait to 2 to 5 you will get answer 
 
