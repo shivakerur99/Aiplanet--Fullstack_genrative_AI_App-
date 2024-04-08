@@ -109,7 +109,7 @@ async def process_data(data: DataInput):
     os.environ['HUGGINGFACEHUB_API_TOKEN'] ="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" 
     dom = [LangchainDocument(page_content=response_data, metadata={"source": "local"})]
 
-    text_spliter = CharacterTextSplitter(chunk_size=3000, chunk_overlap=0)
+    text_spliter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
     docs = text_spliter.split_documents(dom)
 
     embeddings = HuggingFaceEmbeddings()

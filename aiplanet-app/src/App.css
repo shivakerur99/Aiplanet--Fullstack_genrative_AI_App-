@@ -74,6 +74,8 @@
 .Upload-container {
   padding-right: 40px;
   padding-left: 9px;
+  display: flex;
+  gap: 20px;
 }
 @media (max-width: 414px) {
   .Upload-container {
@@ -84,15 +86,27 @@
 
 
 .file-upload-logo {
-  width: 180px;
+  width: 120px;
   height: 39px;
+  border-radius: 8px;
+  border: 1px solid #000000;
+}
+
+.file-upload-l {
+  width: 40px;
+  height: 40px;
   border-radius: 8px;
   border: 1px solid #000000;
 }
 
 @media (max-width: 414px) {
   .file-upload-logo {
-    width: 130px;
+    width: 90px;
+  }
+}
+@media (max-width: 414px) {
+  .file-upload-l {
+    width: 40px;
   }
 }
 
@@ -125,13 +139,13 @@
   cursor: pointer;
   padding: 0;
   outline: none;
-  top:-21px;
-  left:55px;
+  top:5px;
+  left:20px;
 }
 
 @media (max-width: 414px){
   .btn-submit-upload{
-    left:38px    
+    left:10px    
   }
 }
 .chat-log {

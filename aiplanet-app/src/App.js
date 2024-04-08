@@ -94,7 +94,7 @@ return (
           </div>
       </div>
       <div className="Upload-container">
-        <div className="file-upload-logo">
+        <div className="file-upload-l">
           <div className="file-upload-logo-innerfile">
             <label htmlFor="fileInput" className="svg-icon">
               <svg
@@ -124,6 +124,9 @@ return (
                 />
             </label>
           </div>
+          </div>
+          <div className="file-upload-logo">
+
           <button className="btn-submit-upload" onClick={uploadFile}>
             Upload PDF
           </button>
